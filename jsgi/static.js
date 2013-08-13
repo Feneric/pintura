@@ -66,7 +66,7 @@ exports.Static = function(options, nextApp){
 								// File has changed since last served to this client.
 								fs.open(filePath, "r", 0666)
 									.then(function (file) {
-										var headers = {"content-length": stat.size,
+										var headers = {"Content-Length": stat.size,
 											"Vary":"Accept-Encoding",
 											"Date": new Date().toUTCString(),
 											"Last-Modified": modifiedTime.toUTCString()};
@@ -79,7 +79,7 @@ exports.Static = function(options, nextApp){
 										   mimeType.indexOf('json')>=0)) {
 											mimeType+='; charset=UTF-8';
 										}
-										headers['content-type']=mimeType;
+										headers['Content-Type']=mimeType;
 										stat = fs.statSync(filePath); // re-retrieve it
 										var bodyDeferred = defer();
 										var write;
@@ -112,7 +112,7 @@ exports.Static = function(options, nextApp){
 										responseDeferred.resolve({
 											status: 200,
 											headers: {
-												"content-type": "text/html; charset=UTF-8",
+												"Content-Type": "text/html; charset=UTF-8",
 												"Last-Modified": new Date(stat.mtime).toUTCString()
 											},
 											body: {
